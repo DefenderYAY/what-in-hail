@@ -53,9 +53,11 @@ async def timeout(ctx, member: discord.Member, until, *,reason = None):
 async def hi(ctx):
     await ctx.respond(f"Hello {ctx.author}!")
 
-
-@bot.slash_command(description = "meme")
-async def meme(ctx):
+reddit = discord.SlashCommandGroup(
+    "reddit", "Get memes from a few subreddits!"
+)
+@reddit.slash_command(description = "Memes from r/memes")
+async def memes(ctx):
     subreddit = reddit.subreddit("memes")
     all_subs = []
     hot = subreddit.hot(limit = 50)
@@ -71,6 +73,41 @@ async def meme(ctx):
 
     await ctx.respond(embed = emb)
 
+@reddit.slash_command(description = "Memes from r/me_irl")
+async def me_irl(ctx):
+    subreddit = reddit.subreddit("me_irl")
+    all_subs = []
+    hot = subreddit.hot(limit = 100)
+    for submission in hot:
+        all_subs.append(submission)
+    random_sub = random.choice(all_subs)
+
+    name = random_sub.title
+    url = random_sub.url
+
+    emb = discord.Embed(title = name)
+    emb.set_image(url = url)
+
+    await ctx.respond(embed = emb)
+
+@reddit.slash_command(description = "PROGRAMMING HUMOR? NANI???!?!")
+async def programmerhumor(ctx):
+    subreddit = reddit.subreddit("ProgrammerHumor")
+    all_subs = []
+    hot = subreddit.hot(limit = 100)
+    for submission in hot:
+        all_subs.append(submission)
+    random_sub = random.choice(all_subs)
+
+    name = random_sub.title
+    url = random_sub.url
+
+    emb = discord.Embed(title = name)
+    emb.set_image(url = url)
+
+    await ctx.respond(embed = emb)
+
+    
 @bot.slash_command(description = "Thanking the dudes who basically carried me thru development")
 async def credits(ctx):
     em = discord.Embed(title = "THANKS TO EVERYONE IN THIS LIST ILYSM <3", color = discord.Colour.blurple())
