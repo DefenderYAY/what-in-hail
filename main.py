@@ -56,7 +56,7 @@ async def hi(ctx):
 reddit = discord.SlashCommandGroup(
     "reddit", "Get memes from a few subreddits!"
 )
-@reddit.slash_command(description = "Memes from r/memes")
+@reddit.command(description = "Memes from r/memes")
 async def memes(ctx):
     subreddit = reddit.subreddit("memes")
     all_subs = []
@@ -73,7 +73,7 @@ async def memes(ctx):
 
     await ctx.respond(embed = emb)
 
-@reddit.slash_command(description = "Memes from r/me_irl")
+@reddit.command(description = "Memes from r/me_irl")
 async def me_irl(ctx):
     subreddit = reddit.subreddit("me_irl")
     all_subs = []
@@ -90,7 +90,7 @@ async def me_irl(ctx):
 
     await ctx.respond(embed = emb)
 
-@reddit.slash_command(description = "PROGRAMMING HUMOR? NANI???!?!")
+@reddit.command(description = "PROGRAMMING HUMOR? NANI???!?!")
 async def programmerhumor(ctx):
     subreddit = reddit.subreddit("ProgrammerHumor")
     all_subs = []
@@ -107,7 +107,7 @@ async def programmerhumor(ctx):
 
     await ctx.respond(embed = emb)
 
-    
+
 @bot.slash_command(description = "Thanking the dudes who basically carried me thru development")
 async def credits(ctx):
     em = discord.Embed(title = "THANKS TO EVERYONE IN THIS LIST ILYSM <3", color = discord.Colour.blurple())
