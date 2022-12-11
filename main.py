@@ -13,7 +13,7 @@ from discord import (
     default_permissions,
     TextChannel,
 )
-reddit = praw.Reddit(client_id='PMGzmvodaccvvPJYFr6HuQ',
+redditstuff = praw.Reddit(client_id='PMGzmvodaccvvPJYFr6HuQ',
                      client_secret='Mro22mnIZIJHqMwzZUqLjzMiyq5b6g',
                      username = "python_praw_yay",
                      password = "hLG4bdSrF9FYR4",
@@ -53,7 +53,7 @@ async def timeout(ctx, member: discord.Member, until, *,reason = None):
 async def hi(ctx):
     await ctx.respond(f"Hello {ctx.author}!")
 
-bot.add_application_command(reddit)
+bot.add_application_command(redditstuff)
 
 create = discord.SlashCommandGroup(
     "create", "Commands that can help moderators create channels automaticaly."
