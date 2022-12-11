@@ -30,7 +30,7 @@ async def on_ready():
     print("Bot is ready")
     await bot.change_presence(
         activity=discord.Activity(
-            type=discord.ActivityType.playing, name="WHAT THE HAIL IS THAT'"
+            type=discord.ActivityType.playing, name="WHAT THE HAIL IS THAT LMAO"
         ),
         status=discord.Status.dnd,
     )
@@ -52,6 +52,47 @@ async def timeout(ctx, member: discord.Member, until, *,reason = None):
 @bot.slash_command()
 async def hi(ctx):
     await ctx.respond(f"Hello {ctx.author}!")
+
+bot.add_application_command(reddit)
+
+create = discord.SlashCommandGroup(
+    "create", "Commands that can help moderators create channels automaticaly."
+)
+
+
+@create.command(description="Creates a text channel!")
+@default_permissions(manage_channels=True)
+async def channel(ctx, name):
+    await ctx.respond(f"A Text channel with the name {name}!", ephemeral=True)
+    await ctx.guild.create_text_channel(name=name)
+
+
+@create.command(description="Creates a voice channel for you!")
+@default_permissions(manage_channels=True)
+async def vc(ctx, name):
+    await ctx.respond(f"Created a vc with name: {name}", ephemeral=True)
+    await ctx.guild.create_voice_channel(name=name)
+
+
+@create.command(description="Creates a forum channel for you!")
+@default_permissions(manage_channels=True)
+async def forum(ctx, name):
+    await ctx.respond(f"Created a forum channel with name: {name}", ephemeral=True)
+    await ctx.guild.create_forum_channel(name=name)
+
+
+@create.command(description="Creates a stage channel for you!")
+@default_permissions(manage_channels=True)
+async def stage(ctx, name):
+    await ctx.respond(f"Created a stage channel with the name: {name}!", ephemeral=True)
+    await ctx.guild.create_stage_chanel(name=name)
+
+@create.command(description = "Creates a role for you!")
+async def role(ctx,name):
+    await ctx.respond(f"Created a role with the name: {name}!", ephemeral = True)
+    await ctx.guild.create_role(name=name)
+
+bot.add_application_command(create)
 
 reddit = discord.SlashCommandGroup(
     "reddit", "Get memes from a few subreddits!"
