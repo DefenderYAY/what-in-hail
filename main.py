@@ -30,7 +30,7 @@ async def on_ready():
     print("Bot is ready")
     await bot.change_presence(
         activity=discord.Activity(
-            type=discord.ActivityType.playing, name="Haters be hatin'"
+            type=discord.ActivityType.playing, name="WHAT THE HAIL IS THAT'"
         ),
         status=discord.Status.dnd,
     )
@@ -73,11 +73,12 @@ async def meme(ctx):
 
 @bot.slash_command(description = "Thanking the dudes who basically carried me thru development")
 async def credits(ctx):
-    em = discord.embed(title = "THANKS TO EVERYONE IN THIS LIST ILYSM <3", color = discord.Colour.blurple())
+    em = discord.Embed(title = "THANKS TO EVERYONE IN THIS LIST ILYSM <3", color = discord.Colour.blurple())
     em.add_field(
         name="Code With Swastik:",
         value="This man basically carried my bot development, go show him some love(he has actually gone on a hiatus until july of 2023 but shh): [YouTube](https://www.youtube.com/@CodeWithSwastik) [Tweeter](https://twitter.com/codewithswastik) [Discord](https://discord.com/invite/9WeA3Au4rQ)",
         inline=False,
     )
+    await ctx.respond(embed = em)
 load_dotenv(".env")
 bot.run(os.getenv("token"))
