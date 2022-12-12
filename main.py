@@ -38,11 +38,26 @@ async def on_ready():
 
 @bot.slash_command(description = "help Command")
 async def help(ctx):
-    embed = discord.Embed(
+    em = discord.Embed(
         title="Commands",
         description="Help has arrived!",
         color=discord.Color.dark_orange())
-    
+    em.add_field(
+        name = "Times out a member",
+        value = "This command is only can only be used __**moderators**__ or people with the __**Moderate Members**__ permission ",
+        inline = False,  
+    )
+    em.add_field(
+        name = "Reddit Command",
+        value = "This is a group of commands with meme submissions from r/memes, r/me_irl, r/programminghumor.",
+        inline = False,
+    )
+    em.add_field(
+        name = "Create Command",
+        value = "Create: A Group of Commands which helps moderators create simple channels thru commands.",
+        inline = False,
+    )
+    await ctx.respond(embed = em)
 @bot.slash_command(description = "Times a person out!")
 @default_permissions(moderate_members = True)
 async def timeout(ctx, member: discord.Member, until, *,reason = None):
