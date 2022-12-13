@@ -6,6 +6,7 @@ from datetime import timedelta
 from dotenv import load_dotenv
 from discord.commands import Option, slash_command
 from discord.ext.commands import has_permissions, MissingPermissions
+from prsaw import RandomStuff
 from discord import (
     CategoryChannel,
     Member,
@@ -19,6 +20,8 @@ reddit = praw.Reddit(client_id='PMGzmvodaccvvPJYFr6HuQ',
                      password = "hLG4bdSrF9FYR4",
                      user_agent='windows:tImBQ5GiNd7n7OdAQ57N_g:1.0.0 by u/DefenderOP'
                      )
+rs = RandomStuff(async_mode=True) 
+                    
 intents = discord.Intents.all()
 intents.message_content = True
 
@@ -35,6 +38,14 @@ async def on_ready():
         status=discord.Status.dnd,
     )
 
+@bot.event
+async def on_message(message):
+    if bot.user == message.author:
+        return
+    if message.channel.id == 1052195968281481246:
+        response = await rs.get_ai_response(message.content)
+        await message.reply(response)
+    await bot.process_commands(message)
 
 @bot.slash_command(description = "help Command")
 async def help(ctx):
@@ -165,6 +176,13 @@ async def programmerhumor(ctx):
 
 bot.add_application_command(redditstuff)
 
+@bot.slash_command(description = "El classic 8ball", name = "8ball")
+async def ball(ctx, question):
+    ansop = ["Well Yes", "OF COURSE NOT LMAO", "Hmm perhaps", "Let me think... no", "YES OBVIOUSLY"]
+    ans = random.choice(ansop)
+    ctx.respond(f"{ctx.author} asks: {question}")
+    ctx.send(f"{ansop}")
+
 @bot.slash_command(description = "Thanking the dudes who basically carried me thru development")
 async def credits(ctx):
     em = discord.Embed(title = "THANKS TO EVERYONE IN THIS LIST ILYSM <3", color = discord.Colour.blurple())
@@ -174,5 +192,7 @@ async def credits(ctx):
         inline=False,
     )
     await ctx.respond(embed = em)
+
+
 load_dotenv(".env")
 bot.run(os.getenv("token"))
