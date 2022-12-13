@@ -20,7 +20,7 @@ reddit = praw.Reddit(client_id='PMGzmvodaccvvPJYFr6HuQ',
                      password = "hLG4bdSrF9FYR4",
                      user_agent='windows:tImBQ5GiNd7n7OdAQ57N_g:1.0.0 by u/DefenderOP'
                      )
-rs = RandomStuff(async_mode=True) 
+rs = RandomStuff(async_mode=True, api_key = "kgVVfClAZ6Wc") 
                     
 intents = discord.Intents.all()
 intents.message_content = True
